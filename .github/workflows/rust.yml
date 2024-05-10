@@ -19,13 +19,13 @@ jobs:
           override: true
 
       - name: Build for mac
-        run: cargo build --all --release && strip target/release/kx && mv target/release/kx target/release/kx_darwin
+        run: cargo build --all --release && strip target/release/kexec && mv target/release/kexec target/release/kexec_darwin
 
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: |
-            target/release/kx_darwin
+            target/release/kexec_darwin
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
