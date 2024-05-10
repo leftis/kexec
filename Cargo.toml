@@ -2,8 +2,10 @@
 name = "kx"
 version = "0.1.0"
 edition = "2021"
-
+description = "Small program to select on which pod you want to open a shell, it uses fzf and kubectl commands underneath"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/leftis/kx"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
-
+[[bin]]
+name="kx"
