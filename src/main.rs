@@ -22,17 +22,16 @@ fn run_shell(pod: &str, cmd: &str) -> Child {
 
 fn main() {
     let mut fzf = fzf(FZF_ARGS.iter()).expect("with error");
-
     push_pods(K_ARGS.iter(), fzf.stdin.take().unwrap());
-
     let results = fzf.wait_with_output().unwrap();
 
     if let Some(0) = results.status.code() {
         let pod = &String::from_utf8_lossy(&results.stdout).replace("\n", "");
-        let cmd = "/bin/bash";
-        let mut cmd: Child = run_shell(pod, cmd);
-        let status = cmd.wait();
-        println!("Exited with status {:?}", status);
+        let cmd_status = run_shell(pod, "/bin/bash").wait();
+        match cmd_status {
+            Ok(st) => println!("Exited with status {:?}", st),
+            Err(err) => println!("Errored out with {:?}", err)
+        }
     }
 }
 
